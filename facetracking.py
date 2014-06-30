@@ -10,17 +10,7 @@ cap = cv2.VideoCapture(0)
 
 cascade = cv2.CascadeClassifier("haarcascade_frontalface_alt.xml")
 
-x = 1 
-
-
-def box(rects, img):
-    for x1, y1, x2, y2 in rects:
-        cv2.rectangle(img, (x1, y1), (x2, y2), (127, 255, 0), 2)
-    #cv2.imwrite('/vagrant/img/detected.jpg', img);
-	return img
-
-
-showbox = 0
+x = 1  #frame counter
 
 while(True):
     x = x+1
@@ -38,18 +28,10 @@ while(True):
 			ser.write('p')
 			print "p"
 		
-
-    		print rects[0,0]
-		if (showbox == 1):
-			frame = box(rects, frame)
     
     # Our operations on the frame come here
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
     
-    if cv2.waitKey(1) & 0xFF == ord('d'):
-	print "showing rects"
-	showbox = 1
-
     # Display the resulting frame
     cv2.imshow('frame',gray)
     if cv2.waitKey(1) & 0xFF == ord('q'):
